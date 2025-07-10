@@ -1,0 +1,184 @@
+---
+import Image from "astro/components/Image.astro";
+import background from "../assets/imagenes/background.jpg";
+---
+
+<header
+  id="home"
+  class="relative h-screen w-full overflow-hidden flex items-center justify-center bg-neutral-900 px-6"
+>
+  <!-- Fondo con imagen optimizada -->
+  <div class="absolute inset-0">
+    <Image
+      src={background}
+      alt="Fondo minimalista"
+      class="w-full h-full object-cover object-center brightness-75"
+      loading="eager"
+      fetchPriority="high"
+    />
+  </div>
+
+  <!-- Overlay sutil con gradiente -->
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-neutral-900/70 via-neutral-900/40 to-transparent"
+  >
+  </div>
+
+  <!-- Contenido principal con jerarquía tipográfica -->
+  <div class="relative z-10 max-w-2xl text-center px-4 space-y-6">
+    <h1
+      class="text-white text-4xl sm:text-5xl md:text-6xl font-light leading-tight tracking-tight drop-shadow-lg"
+    >
+      Ropa que inspira <span class="font-medium">fe</span> y <span
+        class="font-medium">autenticidad</span
+      >
+    </h1>
+    <p class="text-neutral-300 text-lg sm:text-xl font-light max-w-md mx-auto">
+      Para cada paso de tu camino espiritual
+    </p>
+    <div class="pt-4">
+      <a
+        href="#gallery"
+        class="inline-block px-8 py-3 border border-white text-white font-light hover:bg-white/10 transition-all duration-300 rounded-sm"
+      >
+        Descubre la colección
+      </a>
+    </div>
+  </div>
+
+  <!-- Indicador de scroll minimalista -->
+  <div
+    class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 group"
+    id="scroll-indicator"
+    style="opacity: 0;"
+  >
+    <div class="animate-float flex flex-col items-center">
+      <span class="text-xs text-white/80 mb-2 tracking-widest font-light"
+        >SCROLL</span
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5 text-white group-hover:translate-y-1 transition-transform duration-300"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19 13l-7 7-7-7m14-8l-7 7-7-7"></path>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<style>
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Configuración inicial - asegurar visibilidad inicial
+    gsap.set("header a", { opacity: 1 });
+
+    // Animación para el título principal
+    gsap.from("header h1", {
+      opacity: 0,
+      y: 40,
+      duration: 1.2,
+      ease: "power3.out",
+      delay: 0.2,
+    });
+
+    // Animación para los spans del título
+    gsap.from("header h1 span", {
+      opacity: 0,
+      y: 30,
+      scale: 0.9,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power2.out",
+      delay: 0.5,
+    });
+
+    // Animación para el párrafo
+    gsap.from("header p", {
+      opacity: 0,
+      y: 20,
+      duration: 0.6,
+      delay: 1.1,
+      ease: "power2.out",
+    });
+
+    // Animación RÁPIDA para el botón (sin efecto rebote)
+    gsap.fromTo(
+      "header a",
+      {
+        opacity: 0,
+        y: 15,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4, // Más corta
+        delay: 1.2, // Inicia antes
+        ease: "power2.out", // Transición suave pero directa
+      }
+    );
+
+    // Animación del indicador de scroll
+    gsap.to("#scroll-indicator", {
+      opacity: 1,
+      duration: 0.6,
+      delay: 1.5,
+    });
+
+    // Efecto de scroll para la imagen de fondo
+    gsap.to("header > div:first-child img", {
+      y: "15%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: "header",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    // Scroll suave mejorado con verificación de existencia
+    const btnColeccion = document.querySelector('a[href="#gallery"]');
+    const targetSection = document.getElementById("gallery");
+
+    if (btnColeccion && targetSection) {
+      btnColeccion.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        window.scrollTo({
+          top: targetSection.offsetTop - 81,
+          behavior: "auto",
+        });
+      });
+    } else if (btnColeccion && !targetSection) {
+      console.warn("La sección #gallery no fue encontrada");
+      // Opcional: remover el atributo href para comportamiento normal
+      btnColeccion.removeAttribute("href");
+    }
+  });
+</script>

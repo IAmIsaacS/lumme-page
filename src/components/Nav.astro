@@ -1,0 +1,131 @@
+<nav id="main-nav" class="fixed w-full top-0 left-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100/30 px-6 lg:px-12 py-5 flex justify-between items-center" role="navigation" aria-label="Menú principal">
+    <!-- Logo -->
+    <a href="#" class="text-2xl font-['Playfair_Display'] font-medium tracking-wider text-black" aria-label="Ir a la página principal">LUMME</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden lg:flex space-x-10" role="menubar" aria-label="Menú principal">
+        <a href="#home" class="nav-link text-sm uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 px-3 py-2" role="menuitem" tabindex="0">Inicio</a>
+        <a href="#about" class="nav-link text-sm uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 px-3 py-2" role="menuitem" tabindex="0">Sobre Nosotros</a>
+        <a href="#gallery" class="nav-link text-sm uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 px-3 py-2" role="menuitem" tabindex="0">Coleccion</a>
+        <a href="#contact" class="nav-link text-sm uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 px-3 py-2" role="menuitem" tabindex="0">Contacto</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="lg:hidden focus:outline-none p-2" aria-label="Abrir menú móvil" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 bg-white bg-opacity-95 backdrop-blur-md z-40 transform -translate-x-full transition-transform duration-300 ease-in-out" role="menu" aria-label="Menú móvil" aria-hidden="true" tabindex="-1">
+    <button id="close-menu-btn" class=" absolute top-6 right-6 focus:outline-none p-2" aria-label="Cerrar menú móvil">
+        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+
+    <div class="flex flex-col items-center space-y-8 text-center mt-24 px-6">
+        <a href="#home" class="nav-link text-xl uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 w-full py-4" role="menuitem" tabindex="0">Inicio</a>
+        <a href="#about" class="nav-link text-xl uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 w-full py-4" role="menuitem" tabindex="0">Sobre Nosotros</a>
+        <a href="#gallery" class="nav-link text-xl uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 w-full py-4" role="menuitem" tabindex="0">Coleccion</a>
+        <a href="#contact" class="nav-link text-xl uppercase tracking-wider font-light text-gray-700 hover:text-[#D2B48C] transition-colors duration-300 w-full py-4" role="menuitem" tabindex="0">Contacto</a>
+    </div>
+</div>
+
+<script>
+import gsap from 'gsap';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const nav = document.getElementById('main-nav');
+
+    // Función para abrir menú móvil
+    function openMobileMenu() {
+        mobileMenu.classList.remove('-translate-x-full');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // Animación de los enlaces del menú móvil al abrir
+        gsap.fromTo('#mobile-menu a',
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: "power2.out" }
+        );
+    }
+
+    // Función para cerrar menú móvil
+    function closeMobileMenu() {
+        mobileMenu.classList.add('-translate-x-full');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // Toggle menú móvil
+    mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        if (isOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    // Cerrar menú al hacer clic en botón de cerrar
+    closeMenuBtn.addEventListener('click', closeMobileMenu);
+
+    // Cerrar menú al hacer clic en cualquier enlace del menú móvil
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Animación inicial del navbar
+    gsap.from(nav, {
+        y: -50,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out"
+    });
+
+    // Animación de los enlaces del menú desktop
+    gsap.from('.nav-link', {
+        y: -20,
+        opacity: 0,
+        stagger: 0.1,
+        delay: 0.3,
+        duration: 0.6,
+        ease: "back.out(1.7)"
+    });
+
+    // Altura del nav fijo para ajustar scroll
+    const navHeight = nav.offsetHeight;
+
+    // Scroll suave considerando altura del nav fixed
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - navHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Cerrar menú móvil si está abierto
+            if (mobileMenuBtn.getAttribute('aria-expanded') === 'true') {
+                closeMobileMenu();
+            }
+        });
+    });
+});
+</script>

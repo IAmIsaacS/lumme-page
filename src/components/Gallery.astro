@@ -1,0 +1,143 @@
+---
+import Image from "astro/components/Image.astro"
+import one from '../assets/imagenes/1.jpg';
+import two from '../assets/imagenes/2.jpg';
+import tree from '../assets/imagenes/3.jpg';
+import four from '../assets/imagenes/4.jpg';
+import five from '../assets/imagenes/5.jpg';
+import six from '../assets/imagenes/6.jpg';
+---
+
+<!-- Sección Hero con fondo oscuro -->
+<section id="gallery" class="relative bg-[#31353a] text-gray-100 flex items-center justify-center px-6 py-16 md:py-24 min-h-[60vh]">
+  <div class="relative z-10 max-w-3xl text-center">
+    <h1 class="text-3xl md:text-4xl lg:text-[2.8rem] font-light tracking-tight mb-4">
+      <span class="font-medium">Moda con propósito</span>
+    </h1>
+    
+    <div class="w-20 h-px bg-[#D2B48C] mx-auto my-6 opacity-80"></div>
+    
+    <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl mx-auto font-light">
+      Piezas únicas donde cada detalle comunica un mensaje de fe y esperanza.
+    </p>
+  </div>
+</section>
+
+<!-- Galería integrada - fondo oscuro continuo -->
+<section class="w-full bg-[#31353a] pt-1">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Imagen 1 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={one}
+        alt="Suéter negro con texto en la espalda que dice Jesús pagó el precio en letras blancas."
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "La fe mueve montañas"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">Mateo 17:20</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repite el mismo patrón para las otras 5 imágenes -->
+    <!-- Imagen 2 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={two}
+        alt="Suéter negro con texto en la espalda que dice Jesús murió por mí, ahora yo vivo por Él en letras blancas."
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "Todo lo puedo en Cristo"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">Filipenses 4:13</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen 3 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={tree}
+        alt="Suéter gris claro con imagen de una oveja y texto debajo que dice Dejó el 99 para encontrarme"
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "El Señor es mi pastor"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">Salmo 23:1</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen 4 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={four}
+        alt="Suéter negro con imagen que combina una cruz y un corazón en diseño simple y llamativo."
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "Camina con fe"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">2 Corintios 5:7</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen 5 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={five}
+        alt="Suéter negro con una cruz blanca centrada en el pecho."
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "Ama a tu prójimo"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">Mateo 22:39</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen 6 -->
+    <div class="relative aspect-[3/4] group overflow-hidden">
+      <Image
+        src={six}
+        alt="Franela negra con texto en blanco que dice Yahweh The Great I Am."
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#31353a]/90 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <p class="text-white text-center text-lg font-medium mb-1">
+            "La paz de Dios"
+          </p>
+          <p class="text-[#f8d7a3] text-xs tracking-wide">Filipenses 4:7</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes soft-bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-8px);}
+    60% {transform: translateY(-4px);}
+  }
+  .animate-soft-bounce {
+    animation: soft-bounce 2s infinite;
+  }
+</style>
